@@ -1,0 +1,29 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="{{card.name}}">
+  <ion-content class="padding">
+    <form ng-submit="put(newcard)">
+      <div class="list">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Description</span>
+            <input type="text" placeholder="{{card.desc}}" ng-model="newcard.desc">
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Closed</span>
+            <input type="text" placeholder="{{card.closed}}" ng-model="newcard.closed">
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Last Activity</span>
+            <input type="text" placeholder="{{card.dateLastActivity}}" readonly>
+          </label>
+      </div>
+    	<div class="padding">
+    	  <button type="submit" class="button button-block button-positive">Save</button>
+    	</div>
+    </form>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,21 @@
+<ion-view view-title="Cards">
+  <ion-content>
+    <ion-refresher on-refresh="refresh()"
+                         pulling-text="Pull to refresh..."
+                         refreshing-text="Refreshing!"
+                         refreshing-icon="ion-loading-c">
+
+    </ion-refresher>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="card in cards" type="item-text-wrap" href="#/tab/cards/{{card.id}}">
+        <h2>{{card.name}}</h2>
+        <p>{{card.desc}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+		
+		    <ion-option-button class="button-assertive" ng-click="remove(card)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
