@@ -3,6 +3,7 @@ angular.module('starter.services', [])
 .factory('Tasks', function(TrelloApis) {
   // Might use a resource here that returns a JSON array
   var cards;
+  var departments;
   return {
 
     all: function($scope) {
@@ -29,6 +30,7 @@ angular.module('starter.services', [])
 				TrelloApis.getAllBoardsForMember('me').then(
 					function (boards){
 						$scope.departments = boards;
+						departments = $scope.departments;
 					});
 			});
     },
@@ -51,6 +53,14 @@ angular.module('starter.services', [])
         }
       }
       return null;
+    },
+
+    getDepartment: function(depId){
+    	for (var i = 0; i < departments.length; i++) {
+        if (departments[i].id === depId) {
+          return departments[i];
+        }
+      }
     },
 
     put: function($scope, newCard, cardId){

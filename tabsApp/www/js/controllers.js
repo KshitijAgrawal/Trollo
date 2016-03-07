@@ -13,12 +13,13 @@ angular.module('starter.controllers', [])
 		 $scope.refresh = function(){
 			 Tasks.all($scope);
 			 $scope.$broadcast('scroll.refreshComplete');
-		 };
-	
+		 };	
   })
 
 .controller('TaskDetailCtrl', function($scope, $stateParams, Tasks) {
   $scope.card = Tasks.get($stateParams.cardId);
+
+  $scope.department = Tasks.getDepartment($stateParams.departmentId)
 
   $scope.put = function(newCard){
     Tasks.put($scope, newCard, $stateParams.cardId);

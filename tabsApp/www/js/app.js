@@ -68,6 +68,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+    .state('tab.department-detail', {
+      url: '/departments/:departmentId',
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/department-detail.html',
+          controller: 'TaskDetailCtrl'
+        }
+      }
+    })
 
   .state('tab.account', {
     url: '/account',
