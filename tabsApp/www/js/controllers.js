@@ -1,27 +1,27 @@
 angular.module('starter.controllers', [])
 
-.controller('TaskCtrl', function($scope, Cards) {
+.controller('TaskCtrl', function($scope, Tasks) {
 		
 		 console.log("in factory cards");
-	     Cards.all($scope);
+	     Tasks.all($scope);
 		 $scope.remove = function(card){
-		  Cards.remove($scope, card);
+		  Tasks.remove($scope, card);
 		 };
 		 $scope.add = function(newcard){
-			Cards.post($scope,newcard);
+			Tasks.post($scope,newcard);
 		 };
 		 $scope.refresh = function(){
-			 Cards.all($scope);
+			 Tasks.all($scope);
 			 $scope.$broadcast('scroll.refreshComplete');
 		 };
 	
   })
 
-.controller('TaskDetailCtrl', function($scope, $stateParams, Cards) {
-  $scope.card = Cards.get($stateParams.cardId);
+.controller('TaskDetailCtrl', function($scope, $stateParams, Tasks) {
+  $scope.card = Tasks.get($stateParams.cardId);
 
   $scope.put = function(newCard){
-    Cards.put($scope, newCard, $stateParams.cardId);
+    Tasks.put($scope, newCard, $stateParams.cardId);
   };
 })
 

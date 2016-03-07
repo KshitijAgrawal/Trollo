@@ -1,0 +1,16 @@
+<ion-view view-title="Departments for {{currentUser}}">
+  <ion-content>
+    <ion-refresher on-refresh="refresh()"
+                         pulling-text="Pull to refresh..."
+                         refreshing-text="Refreshing!"
+                         refreshing-icon="ion-loading-c">
+
+    </ion-refresher>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="department in departments" type="item-text-wrap" href="#/tab/departments/{{department.id}}">
+        <h2>{{department.name}}</h2>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
