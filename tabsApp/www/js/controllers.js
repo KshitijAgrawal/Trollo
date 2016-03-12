@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('TaskCtrl', function($scope, Tasks) {
+.controller('TaskCtrl', function($scope,$ionicModal, Tasks) {
 		
 		 console.log("in factory cards");
 	     Tasks.all($scope);
@@ -13,7 +13,33 @@ angular.module('starter.controllers', [])
 		 $scope.refresh = function(){
 			 Tasks.all($scope);
 			 $scope.$broadcast('scroll.refreshComplete');
-		 };	
+		 };
+
+	$ionicModal.fromTemplateUrl('my-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function() {
+  	console.log("showing modal");
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
   })
 
 .controller('TaskDetailCtrl', function($scope, $stateParams, Tasks) {

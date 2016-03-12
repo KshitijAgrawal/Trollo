@@ -22,7 +22,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   });
 })
+.config(['$ionicConfigProvider', function($ionicConfigProvider) {
 
+    $ionicConfigProvider.tabs.position('bottom'); // other values: top
+    $ionicConfigProvider.navBar.alignTitle('center')
+    $ionicConfigProvider.scrolling.jsScrolling(true);
+
+}])
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
