@@ -24,14 +24,19 @@ angular.module('starter.controllers', [])
 	     Tasks.allDepartments(departmentsSuccess);
 
 		 $scope.remove = function(card){
-		  Tasks.remove($scope, card);
+		  	var deleteSuccess = function(deleteResponse){
+		  		$scope.cards.splice($scope.cards.indexOf(card), 1);
+		  		console.log("delete success "+deleteResponse);
+	  		}
+
+		  Tasks.remove(card, deleteSuccess);
 		 };
+
 		 $scope.add = function(newcard){
 			Tasks.post($scope,newcard);
-			$scope.$broadcast('scroll.refreshComplete');
 		 };
 		 $scope.refresh = function(){
-			 Tasks.all($scope);
+			 Tasks.all(allSuccess, memberSuccess);
 			 $scope.$broadcast('scroll.refreshComplete');
 		 };
 

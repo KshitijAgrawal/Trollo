@@ -38,15 +38,19 @@ angular.module('starter.services', [])
 					success);
     },
 
-    remove: function($scope, card) {
-      $scope.cards.splice(cards.indexOf(card), 1);
-	  cards = $scope.cards;
+    remove: function(card, deleteSuccess) {
+      var backupCard = cards[cards.indexOf(card)];
+	  cards.splice(cards.indexOf(card), 1);
 	  var cID = card.id;
-	  var promise = TrelloApis.deleteACard(cID,
+	  TrelloApis.deleteACard(cID,
 	  	function(deleteResponse){
-	  		console.log("delete success "+deleteResponse);},
-	  	function(deleteResponse){
-	  		console.log("delete error "+deleteResponse);});
+	  		deleteSuccess(deleteResponse);
+	  		},
+	  	function(deleteResponse)
+	  	{
+	  		genericError(deleteResponse);
+	  		cards.push(backupCard);
+	  	});
     },
 
     get: function(cardId) {
