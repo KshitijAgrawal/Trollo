@@ -40,7 +40,7 @@ angular.module('starter.controllers', [])
 			 $scope.$broadcast('scroll.refreshComplete');
 		 };
 
-		$ionicModal.fromTemplateUrl('my-modal.html', {
+		$ionicModal.fromTemplateUrl('templates/CreateTaskModal.html', {
 		    scope: $scope,
 		    animation: 'slide-in-up'
 		  }).then(function(modal) {

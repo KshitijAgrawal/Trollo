@@ -1,0 +1,27 @@
+<ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">New Task</h1>
+      <button type = "button" class="button button-clear ion-close-round balanced" ng-click="closeModal()"></button>
+    </ion-header-bar>
+    <ion-content>
+
+    <form ng-submit="add(newcard)" class="padding">
+      <div class="list">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Title</span>
+          <input type="text" ng-model="newcard.name">
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Description</span>
+          <input type="text" ng-model="newcard.desc">
+        </label>
+      </div> 
+      <div>
+        <button type="submit" class="button button-full button-assertive">Save</button>
+      </div>
+    </form>
+</div>
+</div>
+</div>
+      </ion-content>
+  </ion-modal-view>
