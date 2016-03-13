@@ -3,36 +3,39 @@ angular.module('starter.services', [])
 .factory('Tasks', function(TrelloApis) {
   // Might use a resource here that returns a JSON array
   var cards;
-  var departments;
+  var departments;	
   return {
 
-    all: function($scope) {
+    all: function(allSucess, memberSuccess) {
 		console.log("all");	
 		var success = function(cardsResponse) {
-			console.log(cardsResponse);
-			$scope.cards = cardsResponse;
-			cards = $scope.cards;
-			console.log("Trello.get success: "+ JSON.stringify($scope.cards));		
+			allSucess(cardsResponse);
+			cards = cardsResponse;
 		};
-		var error = function(errorMsg) { return null;};	
+		var error = function(errorMsg) { 
+			genericError();
+		};
+
 		TrelloApis.getAllCardsInAList('56c69aa345f99b2f521e36a5').then(
 			success,
 			error
 			);
 
 		TrelloApis.getMember('me').then(
-			function (member) {
-				console.log('member' + member);
-				$scope.currentUser = member.fullName;
-				$scope.departmentIds = member.idBoards;
-				console.log('idboards' + $scope.departmentIds);
+			memberSuccess,
+			genericError
+			);
+    },
 
-				TrelloApis.getAllBoardsForMember('me').then(
-					function (boards){
-						$scope.departments = boards;
-						departments = $scope.departments;
-					});
-			});
+    allDepartments: function(departmentsSuccess)
+    {
+    	var success = function (boards){
+						departmentsSuccess(boards);
+						departments = boards;
+					};
+
+    	TrelloApis.getAllBoardsForMember('me').then(
+					success);
     },
 
     remove: function($scope, card) {

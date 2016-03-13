@@ -1,0 +1,1 @@
+  var genericError = function(errorMsg) { console.log(errorMsg);};
