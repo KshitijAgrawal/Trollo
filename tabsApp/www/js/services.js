@@ -114,15 +114,15 @@ angular.module('starter.services', [])
 				getPromise:function(){
 					return deferred.promise;
 				},
-				success:function(getResponse)
+				success:function(response)
 				{
-					$log.log(callerFunction + " : Successful...");
-					deferred.resolve(getResponse);
+					$log.debug(callerFunction + " : Successful..." + JSON.stringify(response));
+					deferred.resolve(response);
 				},
-				error:function(getResponse)
+				error:function(response)
 				{
-					$log.log(callerFunction+ " : Error...");
-					deferred.reject(getResponse);
+					$log.error(callerFunction+ " : Error..." + JSON.stringify(response));
+					deferred.reject(response);
 				}
 			};	
 	};
