@@ -74,17 +74,17 @@ angular.module('starter.controllers', [])
 		  })
 
 .controller('TaskDetailCtrl', function($scope, $stateParams, Tasks) {
-  $scope.card = Tasks.get($stateParams.cardId);
+		  $scope.card = Tasks.get($stateParams.cardId);
 
-  $scope.department = Tasks.getDepartment($stateParams.departmentId)
+		  $scope.department = Tasks.getDepartment($stateParams.departmentId)
 
-  $scope.put = function(newCard){
-  	var putSuccess = function(data) {
-        console.log('Card Saved successfully. Data returned:' + JSON.stringify(data));
-      };
+		  $scope.put = function(newCard){
+		  	var putSuccess = function(data) {
+		        console.log('Card Saved successfully. Data returned:' + JSON.stringify(data));
+		      };
 
-    Tasks.put(newCard, $stateParams.cardId, putSuccess);
-  };
+		    Tasks.put(newCard, $stateParams.cardId, putSuccess);
+		  };
 })
 
 .controller('AccountCtrl', function($scope) {

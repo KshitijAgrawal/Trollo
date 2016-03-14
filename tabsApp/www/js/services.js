@@ -16,7 +16,7 @@ angular.module('starter.services', [])
 			genericError();
 		};
 
-		TrelloApis.getAllCardsInAList('56c69aa345f99b2f521e36a5').then(
+		TrelloApis.getAllCardsAssignedToMember('me').then(
 			success,
 			error
 			);
@@ -229,6 +229,28 @@ angular.module('starter.services', [])
 		{
 			console.log('getAllBoardsForMember...')
 			var getUri = 'members/'+ memberIdOrUsername + '/boards';
+
+			var deferred = $q.defer();
+
+			var success = function (getResponse) {
+				console.log('success getResponse' + JSON.stringify(getResponse));
+				deferred.resolve(getResponse);
+			}
+			var error = function(getResponse) {
+				console.log('error getResponse' + JSON.stringify(getResponse));
+				deferred.reject(getResponse);
+			}
+
+			var getResponse = Trello.get(getUri, success, error);
+			return deferred.promise;
+		},
+
+		//We consider all of the cards to which member is added
+		//to be assigned to this member
+		getAllCardsAssignedToMember: function(memberIdOrUsername)
+		{
+			console.log('getAllCardsAssignedToMember...')
+			var getUri = 'members/'+ memberIdOrUsername + '/cards';
 
 			var deferred = $q.defer();
 
