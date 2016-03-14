@@ -29,6 +29,37 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     $ionicConfigProvider.scrolling.jsScrolling(true);
 
 }])
+
+.config(['$provide', function ($provide) {
+    $provide.decorator('$log', ['$delegate', function ($delegate) {
+        // Keep track of the original debug/error method, we'll need it later.
+        var origDebug = $delegate.debug;
+        var origError = $delegate.error;
+        /*
+         * Intercept the call to $log.debug(), $log.error() so we can add on 
+         * our enhancement. We're going to add on a date and 
+         * time stamp to the message that will be logged.
+         */
+        $delegate.debug = function () {
+            var args = [].slice.call(arguments);
+            args[0] = [new Date().toString(), ': ', args[0]].join('');
+            
+            // Send on our enhanced message to the original debug method.
+            origDebug.apply(null, args)
+        };
+
+        $delegate.error = function () {
+            var args = [].slice.call(arguments);
+            args[0] = [new Date().toString(), ': ', args[0]].join('');
+            
+            // Send on our enhanced message to the original error method.
+            origError.apply(null, args)
+        };
+
+        return $delegate;
+    }]);
+}])
+
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
