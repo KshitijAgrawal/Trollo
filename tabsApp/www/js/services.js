@@ -104,145 +104,84 @@ angular.module('starter.services', [])
   };
 })
 
-.factory('TrelloApis', function ($q)
+.factory('TrelloApis', function ($q, $log)
 {
+	var httpHelper = function(callerFunction)
+	{
+		var deferred = $q.defer();
+		return{
+				getPromise:function(){
+					return deferred.promise;
+				},
+				success:function(getResponse)
+				{
+					$log.log(callerFunction + " : Successful...");
+					deferred.resolve(getResponse);
+				},
+				error:function(getResponse)
+				{
+					$log.log(callerFunction+ " : Error...");
+					deferred.reject(getResponse);
+				}
+			};	
+	};
 	return {
-		authorize: function()
-		{
-			var authenticationSuccess = function() { console.log('Successful authentication'); };
-			var authenticationFailure = function() { console.log('Failed authentication'); };
-			Trello.authorize({
-			  //type: popup,
-			  name: 'Getting Started Application',
-			  scope: {
-				read: true,
-				write: true },
-			  //expiration: never,
-			  success: authenticationSuccess,
-			  error: authenticationFailure
-			});
-		},
-
 		getAllCardsInAList: function(listId)
 		{
-			console.log('getAllCardsInAList...')
 			var listUri = 'lists/' + listId + '/cards';
-
-			var deferred = $q.defer();
-
-			var success = function (getResponse) {
-				console.log('success getResponse' + JSON.stringify(getResponse));
-				deferred.resolve(getResponse);
-			}
-			var error = function(getResponse) {
-				console.log('error getResponse' + JSON.stringify(getResponse));
-				deferred.reject(getResponse);
-			}
-
-			var getResponse = Trello.get(listUri, success, error);
-			return deferred.promise;
+			var hh = httpHelper("getAllCardsInAList");
+			Trello.get(listUri, hh.success, hh.error);
+			return hh.getPromise();
 		},
 
 		deleteACard: function(cardId)
 		{
-			console.log('deleteACard...')
 			var deleteUri = 'cards/' + cardId;
-
-			var deferred = $q.defer();
-
-			var success = function (deleteResponse) {
-				console.log('success deleteResponse' + JSON.stringify(deleteResponse));
-				deferred.resolve(deleteResponse);
-			}
-			var error = function(deleteResponse) {
-				console.log('error deleteResponse' + JSON.stringify(deleteResponse));
-				deferred.reject(deleteResponse);
-			}
-
-			var deleteResponse = Trello.delete(deleteUri, success, error);
-			return deferred.promise;
+			var hh = httpHelper("deleteACard");
+		    Trello.delete(deleteUri, hh.success, hh.error);
+			return hh.getPromise();
 		},
 
 		createANewcard: function(newCard)
 		{
-			console.log('createANewcard...')
 			var createUri = 'cards/';
-
-			var deferred = $q.defer();
-
-			var success = function (createResponse) {
-				console.log('success createResponse' + JSON.stringify(createResponse));
-				deferred.resolve(createResponse);
-			}
-			var error = function(createResponse) {
-				console.log('error createResponse' + JSON.stringify(createResponse));
-				deferred.reject(createResponse);
-			}
-
-			var createResponse = Trello.post(createUri, newCard, success, error);
-			return deferred.promise;
+			var hh = httpHelper("createANewcard");
+			Trello.post(createUri, newCard, hh.success, hh.error);
+			return hh.getPromise();
 		},
 
 		modifyACard: function(cardId, newCard)
 		{
-			console.log('modifyACard...')
 			var putUri = 'cards/'+ cardId;
-
-			var deferred = $q.defer();
-
-			var success = function (putResponse) {
-				console.log('success putResponse' + JSON.stringify(putResponse));
-				deferred.resolve(putResponse);
-			}
-			var error = function(putResponse) {
-				console.log('error putResponse' + JSON.stringify(putResponse));
-				deferred.reject(putResponse);
-			}
-
-			var putResponse = Trello.put(putUri, newCard, success, error);
-			return deferred.promise;
+			var hh = httpHelper("modifyACard");
+			Trello.put(putUri, newCard, hh.success, hh.error);
+			return hh.getPromise();
 
 		},
 
 		getMember: function(memberIdOrUsername)
 		{
-			console.log('getMember...')
 			var getUri = 'members/'+ memberIdOrUsername;
-
-			var deferred = $q.defer();
-
-			var success = function (getResponse) {
-				console.log('success getResponse' + JSON.stringify(getResponse));
-				deferred.resolve(getResponse);
-			}
-			var error = function(getResponse) {
-				console.log('error getResponse' + JSON.stringify(getResponse));
-				deferred.reject(getResponse);
-			}
-
-			var getResponse = Trello.put(getUri, success, error);
-			return deferred.promise;
+		    var hh = httpHelper("getMember");
+			Trello.put(getUri, hh.success, hh.error);
+			return hh.getPromise();
 		},
 
 		getAllBoardsForMember: function(memberIdOrUsername)
 		{
-			console.log('getAllBoardsForMember...')
 			var getUri = 'members/'+ memberIdOrUsername + '/boards';
+			var hh = httpHelper("getAllBoardsForMember");
+			Trello.get(getUri, hh.success, hh.error);
+			return hh.getPromise();
+		},
 
-			var deferred = $q.defer();
-
-			var success = function (getResponse) {
-				console.log('success getResponse' + JSON.stringify(getResponse));
-				deferred.resolve(getResponse);
-			}
-			var error = function(getResponse) {
-				console.log('error getResponse' + JSON.stringify(getResponse));
-				deferred.reject(getResponse);
-			}
-
-			var getResponse = Trello.get(getUri, success, error);
-			return deferred.promise;
+		getAllMembersForBoard: function(boardId)
+		{
+			var getUri = 'boards/' + boardId + '/members';
+			var hh = httpHelper("getMember");
+			Trello.get(getUri, hh.success, hh.error);
+			return hh.getPromise();
 		}
-
 	};
 });
+	
