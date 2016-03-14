@@ -176,50 +176,22 @@ angular.module('starter.services', [])
 			return hh.getPromise();
 		},
 
-<<<<<<< HEAD
 		getAllMembersForBoard: function(boardId)
 		{
 			var getUri = 'boards/' + boardId + '/members';
-			var hh = httpHelper("getMember");
+			var hh = httpHelper("getAllMembersForBoard");
 			Trello.get(getUri, hh.success, hh.error);
 			return hh.getPromise();
-=======
-			var deferred = $q.defer();
-
-			var success = function (getResponse) {
-				console.log('success getResponse' + JSON.stringify(getResponse));
-				deferred.resolve(getResponse);
-			}
-			var error = function(getResponse) {
-				console.log('error getResponse' + JSON.stringify(getResponse));
-				deferred.reject(getResponse);
-			}
-
-			var getResponse = Trello.get(getUri, success, error);
-			return deferred.promise;
 		},
 
 		//We consider all of the cards to which member is added
 		//to be assigned to this member
 		getAllCardsAssignedToMember: function(memberIdOrUsername)
 		{
-			console.log('getAllCardsAssignedToMember...')
 			var getUri = 'members/'+ memberIdOrUsername + '/cards';
-
-			var deferred = $q.defer();
-
-			var success = function (getResponse) {
-				console.log('success getResponse' + JSON.stringify(getResponse));
-				deferred.resolve(getResponse);
-			}
-			var error = function(getResponse) {
-				console.log('error getResponse' + JSON.stringify(getResponse));
-				deferred.reject(getResponse);
-			}
-
-			var getResponse = Trello.get(getUri, success, error);
-			return deferred.promise;
->>>>>>> 0eada1b1886b482d1046c3b4bc2cfd10c5c63ac0
+			var hh = httpHelper("getAllCardsAssignedToMember");
+			Trello.get(getUri, hh.success, hh.error);
+			return hh.getPromise();
 		}
 	};
 });
