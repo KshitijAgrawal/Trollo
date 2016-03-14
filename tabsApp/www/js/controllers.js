@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('TaskCtrl', function($scope,$ionicModal, Tasks) {
+.controller('TaskCtrl', function($scope, $ionicModal, Tasks) {
 		
 		 console.log("in factory cards");
 
@@ -24,14 +24,25 @@ angular.module('starter.controllers', [])
 	     Tasks.allDepartments(departmentsSuccess);
 
 		 $scope.remove = function(card){
-		  Tasks.remove($scope, card);
+		  	var deleteSuccess = function(deleteResponse){
+		  		$scope.cards.splice($scope.cards.indexOf(card), 1);
+		  		console.log("delete success "+deleteResponse);
+	  		}
+
+		  Tasks.remove(card, deleteSuccess);
 		 };
+
 		 $scope.add = function(newcard){
-			Tasks.post($scope,newcard);
-			$scope.$broadcast('scroll.refreshComplete');
+		  var addSuccess = function(createdCard) {
+			  $scope.cards.push(createdCard);
+			  console.log('Card created successfully. Data returned:' + JSON.stringify(createResponse));
+			};
+
+			Tasks.post(newcard, addSuccess);
 		 };
+
 		 $scope.refresh = function(){
-			 Tasks.all($scope);
+			 Tasks.all(allSuccess, memberSuccess);
 			 $scope.$broadcast('scroll.refreshComplete');
 		 };
 
@@ -63,13 +74,17 @@ angular.module('starter.controllers', [])
 		  })
 
 .controller('TaskDetailCtrl', function($scope, $stateParams, Tasks) {
-  $scope.card = Tasks.get($stateParams.cardId);
+		  $scope.card = Tasks.get($stateParams.cardId);
 
-  $scope.department = Tasks.getDepartment($stateParams.departmentId)
+		  $scope.department = Tasks.getDepartment($stateParams.departmentId)
 
-  $scope.put = function(newCard){
-    Tasks.put($scope, newCard, $stateParams.cardId);
-  };
+		  $scope.put = function(newCard){
+		  	var putSuccess = function(data) {
+		        console.log('Card Saved successfully. Data returned:' + JSON.stringify(data));
+		      };
+
+		    Tasks.put(newCard, $stateParams.cardId, putSuccess);
+		  };
 })
 
 .controller('AccountCtrl', function($scope) {
