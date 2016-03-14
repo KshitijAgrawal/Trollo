@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('TaskCtrl', function($scope,$ionicModal, Tasks) {
+.controller('TaskCtrl', function($scope, $ionicModal, Tasks) {
 		
 		 console.log("in factory cards");
 
@@ -33,8 +33,14 @@ angular.module('starter.controllers', [])
 		 };
 
 		 $scope.add = function(newcard){
-			Tasks.post($scope,newcard);
+		  var addSuccess = function(createdCard) {
+			  $scope.cards.push(createdCard);
+			  console.log('Card created successfully. Data returned:' + JSON.stringify(createResponse));
+			};
+
+			Tasks.post(newcard, addSuccess);
 		 };
+
 		 $scope.refresh = function(){
 			 Tasks.all(allSuccess, memberSuccess);
 			 $scope.$broadcast('scroll.refreshComplete');
@@ -73,7 +79,11 @@ angular.module('starter.controllers', [])
   $scope.department = Tasks.getDepartment($stateParams.departmentId)
 
   $scope.put = function(newCard){
-    Tasks.put($scope, newCard, $stateParams.cardId);
+  	var putSuccess = function(data) {
+        console.log('Card Saved successfully. Data returned:' + JSON.stringify(data));
+      };
+
+    Tasks.put(newCard, $stateParams.cardId, putSuccess);
   };
 })
 

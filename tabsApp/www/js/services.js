@@ -40,6 +40,7 @@ angular.module('starter.services', [])
 
     remove: function(card, deleteSuccess) {
       var backupCard = cards[cards.indexOf(card)];
+      // remove from cards for
 	  cards.splice(cards.indexOf(card), 1);
 	  var cID = card.id;
 	  TrelloApis.deleteACard(cID,
@@ -70,27 +71,24 @@ angular.module('starter.services', [])
       }
     },
 
-    put: function($scope, newCard, cardId){
-      var creationSuccess = function(data) {
-        $scope.cards.splice($scope.cards.indexOf(newCard), 1);
-        $scope.cards.push(newCard);
-        cards = $scope.cards;
-        console.log('Card Saved successfully. Data returned:' + JSON.stringify(data));
+    put: function(newCard, cardId, putSuccess){
+      var creationSuccess = function(putCard) {
+        putSuccess(putCard);
+        cards.splice(cards.indexOf(putCard), 1);
+        cards.push(putCard);
       };
       console.log('PUT card');
       var promise = TrelloApis.modifyACard(cardId, newCard).then(
       	creationSuccess,
-      	function(putResponse){
-	  		console.log("put error "+putResponse);});
+      	genericError);
     },
 
-	post: function($scope,inputcard)
+	post: function(inputcard, addSuccess)
 	{
 		var myList = '56c69aa345f99b2f521e36a5';
-		var creationSuccess = function(createResponse) {
-		  $scope.cards.push(newCard);
-	      cards = $scope.cards;
-		  console.log('Card created successfully. Data returned:' + JSON.stringify(createResponse));
+		var creationSuccess = function(createdCard) {
+		  addSuccess(createdCard);
+	      cards.push(createdCard);
 		};
 		var newCard = {
 		  name: inputcard.name, 
@@ -99,10 +97,9 @@ angular.module('starter.services', [])
 		  idList: myList,
 		  pos: 'top'
 		};
-		var promise = TrelloApis.createANewcard(newCard).then(
+		TrelloApis.createANewcard(newCard).then(
 			creationSuccess,
-			function(createResponse){
-	  			console.log("delete error "+ createResponse);}
+			genericError
 			);
 	}
   };
