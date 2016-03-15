@@ -71,6 +71,11 @@ angular.module('starter.services', [])
       }
     },
 
+    getMembersForDepartment: function(depId, getSuccess){
+    	TrelloApis.getAllMembersForBoard(depId).then
+    	(getSuccess, genericError);
+    },
+
     put: function(newCard, cardId, putSuccess){
       var creationSuccess = function(putCard) {
         putSuccess(putCard);
@@ -90,19 +95,26 @@ angular.module('starter.services', [])
 		  addSuccess(createdCard);
 	      cards.push(createdCard);
 		};
-		var newCard = {
-		  name: inputcard.name, 
-		  desc: inputcard.desc,
-		  // Place this card at the top of our list 
-		  idList: myList,
-		  pos: 'top'
-		};
-		TrelloApis.createANewcard(newCard).then(
-			creationSuccess,
-			genericError
-			);
-	}
-  };
+
+		TrelloApis.getAllListsForBoard(inputcard.department.id).then(
+			function(lists)
+			{
+				var newCard = {
+				  name: inputcard.name, 
+				  desc: inputcard.desc, 
+				  idList: lists[0].id,
+				  idBoard: inputcard.department.id,
+				  idMembers: [inputcard.assignedTo.id],
+				  pos: 'top'
+				};
+				TrelloApis.createANewcard(newCard).then(
+					creationSuccess,
+					genericError
+				);
+			}
+		);
+  	}
+};
 })
 
 .factory('TrelloApis', function ($q, $log)
@@ -180,6 +192,14 @@ angular.module('starter.services', [])
 		{
 			var getUri = 'boards/' + boardId + '/members';
 			var hh = httpHelper("getAllMembersForBoard");
+			Trello.get(getUri, hh.success, hh.error);
+			return hh.getPromise();
+		},
+
+		getAllListsForBoard: function(boardId)
+		{
+			var getUri = 'boards/' + boardId + '/lists';
+			var hh = httpHelper("getAllListsForBoard");
 			Trello.get(getUri, hh.success, hh.error);
 			return hh.getPromise();
 		},

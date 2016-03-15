@@ -3,25 +3,32 @@
       <h1 class="title">New Task</h1>
       <button type = "button" class="button button-clear ion-close-round balanced" ng-click="closeModal()"></button>
     </ion-header-bar>
-    <ion-content>
 
-    <form ng-submit="add(newcard)" class="padding">
+    <ion-content>
+    <form ng-submit="add(newCard)" class="padding">
       <div class="list">
         <label class="item item-input item-stacked-label">
           <span class="input-label">Title</span>
-          <input type="text" ng-model="newcard.name">
+          <input type="text" ng-model="newCard.name">
         </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label">Description</span>
-          <input type="text" ng-model="newcard.desc">
+          <input type="text" ng-model="newCard.desc">
         </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Department</span>
+          <select name="departmentSelect" id="departmentSelect" ng-options="department.name for department in departments" ng-model = "newCard.department"> 
+          </select>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Assigned To</span>
+          <select name="memberSelect" id="memberSelect" ng-options="member.fullName for member in newCard.members" ng-model = "newCard.assignedTo"> 
+          </select>
+        </label>     
       </div> 
       <div>
         <button type="submit" class="button button-full button-assertive">Save</button>
       </div>
     </form>
-</div>
-</div>
-</div>
-      </ion-content>
-  </ion-modal-view>
+    </ion-content>
+</ion-modal-view>

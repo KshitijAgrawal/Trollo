@@ -11,9 +11,7 @@ angular.module('starter.controllers', [])
 
 		 var memberSuccess = function (member) {
 			console.log('member' + member);
-			$scope.currentUser = member.fullName;
-			$scope.departmentIds = member.idBoards;
-			console.log('idboards' + $scope.departmentIds);	
+			$scope.currentUser = member;
 		 };
 
 		 var departmentsSuccess = function (boards){
@@ -35,7 +33,7 @@ angular.module('starter.controllers', [])
 		 $scope.add = function(newcard){
 		  var addSuccess = function(createdCard) {
 			  $scope.cards.push(createdCard);
-			  console.log('Card created successfully. Data returned:' + JSON.stringify(createResponse));
+			  console.log('Card created successfully. Data returned:' + JSON.stringify(createdCard));
 			};
 
 			Tasks.post(newcard, addSuccess);
@@ -54,6 +52,11 @@ angular.module('starter.controllers', [])
 		  });
 		  $scope.openModal = function() {
 		  	console.log("showing modal");
+		  	$scope.newCard = {}; //reset
+		    $scope.newCard.department = $scope.departments[0];
+		    $scope.newCard.members = [$scope.currentUser];
+		    $scope.newCard.assignedTo = $scope.newCard.members[0];
+		    console.log($scope.newCard.assignedTo.fullName);
 		    $scope.modal.show();
 		  };
 		  $scope.closeModal = function() {
