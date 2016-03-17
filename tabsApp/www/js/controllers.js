@@ -44,6 +44,16 @@ angular.module('starter.controllers', [])
 			 $scope.$broadcast('scroll.refreshComplete');
 		 };
 
+		 $scope.refreshNewcardMembers = function(){
+		 	var getSuccess = function(members)
+		 	{
+		 		console.log('members' + members);
+		 		$scope.newCard.members = members;
+		 		$scope.newCard.assignedTo = $scope.newCard.members[0];
+		 	}
+		 	Tasks.getMembersForDepartment($scope.newCard.department.id, getSuccess);
+		 }
+
 		$ionicModal.fromTemplateUrl('templates/CreateTaskModal.html', {
 		    scope: $scope,
 		    animation: 'slide-in-up'
