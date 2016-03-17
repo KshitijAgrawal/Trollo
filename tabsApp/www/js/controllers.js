@@ -34,6 +34,7 @@ angular.module('starter.controllers', [])
 		  var addSuccess = function(createdCard) {
 			  $scope.cards.push(createdCard);
 			  console.log('Card created successfully. Data returned:' + JSON.stringify(createdCard));
+			  $scope.closeModal();
 			};
 
 			Tasks.post(newcard, addSuccess);
