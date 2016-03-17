@@ -64,9 +64,7 @@ angular.module('starter.controllers', [])
 		  	console.log("showing modal");
 		  	$scope.newCard = {}; //reset
 		    $scope.newCard.department = $scope.departments[0];
-		    $scope.newCard.members = [$scope.currentUser];
-		    $scope.newCard.assignedTo = $scope.newCard.members[0];
-		    console.log($scope.newCard.assignedTo.fullName);
+		    $scope.refreshNewcardMembers();
 		    $scope.modal.show();
 		  };
 		  $scope.closeModal = function() {

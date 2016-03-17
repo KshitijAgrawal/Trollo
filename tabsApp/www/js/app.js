@@ -123,16 +123,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'AccountCtrl'
       }
     }
-  })
-  
-   .state('tab.new-card', {
-    url: '/new-card',
-    views: {
-      'tab-new-card': {
-        templateUrl: 'templates/new-card.html',
-        controller: 'TaskCtrl'
-      }
-    }
   });
 
   // if none of the above states are matched, use this as the fallback
