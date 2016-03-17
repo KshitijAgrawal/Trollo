@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('TaskCtrl', function($scope, $ionicModal, Tasks) {
+.controller('TaskCtrl', function($scope, $ionicModal, $ionicPopover, Tasks) {
 		
 		 console.log("in factory cards");
 
@@ -61,6 +61,7 @@ angular.module('starter.controllers', [])
 		  }).then(function(modal) {
 		    $scope.modal = modal;
 		  });
+
 		  $scope.openModal = function() {
 		  	console.log("showing modal");
 		  	$scope.newCard = {}; //reset
@@ -83,6 +84,37 @@ angular.module('starter.controllers', [])
 		  $scope.$on('modal.removed', function() {
 		    // Execute action
 		  });
+
+
+		  $ionicPopover.fromTemplateUrl('templates/TaskPopover.html', {
+		    scope: $scope
+		  }).then(function(popover) {
+		    $scope.popover = popover;
+		  });
+
+
+		  $scope.openPopover = function($event) {
+		    $scope.popover.show($event);
+		  };
+		  $scope.closePopover = function() {
+		    $scope.popover.hide();
+		  };
+		  //Cleanup the popover when we're done with it!
+		  $scope.$on('$destroy', function() {
+		    $scope.popover.remove();
+		  });
+		  // Execute action on hide popover
+		  $scope.$on('popover.hidden', function() {
+		    // Execute action
+		  });
+		  // Execute action on remove popover
+		  $scope.$on('popover.removed', function() {
+		    // Execute action
+		  });
+
+
+
+
 		  })
 
 .controller('TaskDetailCtrl', function($scope, $stateParams, Tasks) {
