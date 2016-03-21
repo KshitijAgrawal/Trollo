@@ -1,1 +1,18 @@
 /* Empty. Add your own CSS if you like */
+#task-card .item
+{
+	padding: 5px;
+}
+
+#task-card .row
+{
+	padding: 0px;
+}
+
+#task-card .button
+{
+	min-height: 20px;
+	min-width: 32px;
+	line-height: 20px;
+	padding:0px;
+}
