@@ -134,6 +134,7 @@ angular.module('starter.services', [])
 				error:function(response)
 				{
 					$log.error(callerFunction+ " : Error..." + JSON.stringify(response));
+					Trello.deauthorize();
 					deferred.reject(response);
 				}
 			};	
