@@ -1,9 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('TaskCtrl', function($scope, $ionicModal, $ionicPopover, Tasks) {
-		
-		 console.log("in factory cards");
-
+.controller('TaskCtrl', function($scope, $ionicModal, $ionicPopover, Tasks) {		
 		 var allSuccess = function(cardsResponse) {
 			console.log(cardsResponse);
 			$scope.cards = cardsResponse;
@@ -21,6 +18,7 @@ angular.module('starter.controllers', [])
 	     Tasks.all(allSuccess, memberSuccess);
 	     Tasks.allDepartments(departmentsSuccess);
 
+	     // Remove a task --------------------------------------
 		 $scope.remove = function(card){
 		  	var deleteSuccess = function(deleteResponse){
 		  		$scope.cards.splice($scope.cards.indexOf(card), 1);
@@ -30,6 +28,7 @@ angular.module('starter.controllers', [])
 		  Tasks.remove(card, deleteSuccess);
 		 };
 
+		 // Add a Task ------------------------------------------
 		 $scope.add = function(newcard){
 		  var addSuccess = function(createdCard) {
 			  $scope.cards.push(createdCard);
@@ -40,6 +39,7 @@ angular.module('starter.controllers', [])
 			Tasks.post(newcard, addSuccess);
 		 };
 
+		 //Refresh ----------------------------------------------
 		 $scope.refresh = function(){
 			 Tasks.all(allSuccess, memberSuccess);
 			 $scope.$broadcast('scroll.refreshComplete');
@@ -55,6 +55,38 @@ angular.module('starter.controllers', [])
 		 	Tasks.getMembersForDepartment($scope.newCard.department.id, getSuccess);
 		 }
 
+		 // All Departments page --------------------------------
+		 var shownCards = {};
+		 $scope.toggleDepartment = function(department) {
+		    if ($scope.isDepartmentShown(department)) {
+		      $scope.shownDepartmentCards = null;
+		      $scope.shownDepartment = null;
+		    } else 
+		    {
+		      if(shownCards[department.id] == undefined)
+		      {
+		      	console.log("shownCards[department.id] = undefined")
+		      	var getSuccess = function(tasks)
+			 	{
+			 		console.log('tasks for dept' + JSON.stringify(tasks));
+			 		$scope.shownDepartmentCards = tasks;
+			 		shownCards[department.id] = tasks;
+			 	}
+		      	Tasks.getTasksForDepartment(department.id, getSuccess);
+		      } else {
+		      	console.log("already in cache")
+		      	$scope.shownDepartmentCards = shownCards[department.id];
+		      }
+		      $scope.shownDepartment = department;
+		    }
+		  };
+		  $scope.isDepartmentShown = function(department) {
+		    return $scope.shownDepartment === department;
+		  };
+
+		 //----------------------------------------------------------------------------
+
+		 // Modal for adding new Task
 		$ionicModal.fromTemplateUrl('templates/CreateTaskModal.html', {
 		    scope: $scope,
 		    animation: 'slide-in-up'
@@ -85,6 +117,7 @@ angular.module('starter.controllers', [])
 		    // Execute action
 		  });
 
+		  //-------------------------------------------------------------------------------
 
 		  $ionicPopover.fromTemplateUrl('templates/TaskPopover.html', {
 		    scope: $scope
@@ -112,7 +145,7 @@ angular.module('starter.controllers', [])
 		    // Execute action
 		  });
 
-
+		  //--------------------------------------------------------------------------------
 
 
 		  })

@@ -76,6 +76,11 @@ angular.module('starter.services', [])
     	(getSuccess, genericError);
     },
 
+    getTasksForDepartment: function(depId, getSuccess){
+    	TrelloApis.getAllCardsForBoard(depId).then
+    	(getSuccess, genericError);
+    },
+
     put: function(newCard, cardId, putSuccess){
       var creationSuccess = function(putCard) {
         putSuccess(putCard);
@@ -201,6 +206,14 @@ angular.module('starter.services', [])
 		{
 			var getUri = 'boards/' + boardId + '/lists';
 			var hh = httpHelper("getAllListsForBoard");
+			Trello.get(getUri, hh.success, hh.error);
+			return hh.getPromise();
+		},
+
+		getAllCardsForBoard: function(boardId)
+		{
+			var getUri = 'boards/' + boardId + '/cards';
+			var hh = httpHelper("getAllCardsForBoard");
 			Trello.get(getUri, hh.success, hh.error);
 			return hh.getPromise();
 		},
