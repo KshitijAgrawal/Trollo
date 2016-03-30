@@ -4,45 +4,19 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<!--
-<ion-view view-title="{{card.name}}">
-  <ion-content class="padding">
-    <form ng-submit="put(newcard)">
-      <div class="list card">
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">Description</span>
-            <input type="text" placeholder="{{card.desc}}" ng-model="newcard.desc">
-          </label>
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">Closed</span>
-            <input type="text" placeholder="{{card.closed}}" ng-model="newcard.closed">
-          </label>
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">Last Activity</span>
-            <input type="text" placeholder="{{card.dateLastActivity}}" readonly>
-          </label>
-      </div>
-    	<div class="padding">
-    	  <button type="submit" class="button button-block button-positive">Save</button>
-    	</div>
-    </form>
-  </ion-content>
-</ion-view>
--->
 <ion-view >
   <ion-content class="padding">
     <form ng-submit="put(card)" name="editTaskForm">
-    <h1 contenteditable="true" ng-model="card.name"> {{card.name}} </h1>
-      <div class="list card">
-          <label class="item item-input">
-            <input type="text" placeholder="{{card.desc}}" ng-model="card.desc">
-          </label>
-          <label class="item item-input item-stacked-label">
-            <input type="text" placeholder="{{card.closed}}" ng-model="card.closed">
-          </label>
+      <div class="card">
+        <div class="item item-divider">
+          <h1 contenteditable="true" ng-model="card.name"> {{card.name}} </h1>
+        </div>
+        <div class="item item-body">
+          <p contenteditable="true" ng-model="card.desc"> {{card.desc}} </p>
+        </div>
       </div>
       <div class="padding">
-        <button type="submit" class="button button-block button-positive" ng-disabled="editTaskForm.$invalid">Save</button>
+        <button type="submit" class="button button-block button-positive" ng-disabled="editTaskForm.$pristine || editTaskForm.$submitted">Save</button>
       </div>
     </form>
   </ion-content>
