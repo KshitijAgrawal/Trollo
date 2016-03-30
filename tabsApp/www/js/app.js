@@ -154,48 +154,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'TaskDetailCtrl'
         }
       }
-    })
-
-  .state('tab.dash', {
-    url: '/dash',
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'TaskCtrl'
-      }
-    }
-  })
-  
-
-  .state('tab.departments', {
-      url: '/departments',
-      views: {
-        'tab-dash': {
-          templateUrl: 'templates/tab-departments.html',
-          controller: 'TaskCtrl'
-        }
-      }
-    })
-	
-    .state('tab.department-detail', {
-      url: '/departments/:departmentId',
-      views: {
-        'tab-dash': {
-          templateUrl: 'templates/department-detail.html',
-          controller: 'TaskDetailCtrl'
-        }
-      }
-    })
-
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  });
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/home');
