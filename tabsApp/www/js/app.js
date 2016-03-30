@@ -98,6 +98,63 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
 
   // Each tab has its own nav history stack:
+  .state('tab.home', {
+    url: '/home',
+    views: {
+      'tab-home': {
+        templateUrl: 'templates/tab-home.html',
+      //  controller: 'HomeCtrl'
+      }
+    }
+  })
+
+      .state('tasks', {
+      url: "/tasks",
+      abstract: true,
+      templateUrl: "templates/tab-tasks.html",
+     // controller: 'AppCtrl'
+    })
+
+  .state('tasks.departments', {
+      url: "/departments",
+      views: {
+        'taskscontent' :{
+          templateUrl: "templates/tab-departments.html",
+          controller: 'TasksCtrl'
+        }
+      }
+    })
+
+
+  .state('tasks.mydepartment', {
+      url: "/mydepartment",
+      views: {
+        'taskscontent' :{
+          templateUrl: "templates/tab-mydepartment.html",
+          controller: 'TasksCtrl'
+        }
+      }
+    })
+
+  .state('tasks.assignedtome', {
+      url: "/assignedtome",
+      views: {
+        'taskscontent' :{
+          templateUrl: "templates/tab-assignedtome.html",
+          controller: 'TasksCtrl'
+        }
+      }
+    })
+
+  .state('tasks.card-detail', {
+      url: '/cards/:cardId',
+      views: {
+        'taskscontent': {
+          templateUrl: 'templates/card-detail.html',
+          controller: 'TaskDetailCtrl'
+        }
+      }
+    })
 
   .state('tab.dash', {
     url: '/dash',
@@ -108,15 +165,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     }
   })
-  .state('tab.card-detail', {
-      url: '/cards/:cardId',
-      views: {
-        'tab-dash': {
-          templateUrl: 'templates/card-detail.html',
-          controller: 'TaskDetailCtrl'
-        }
-      }
-    })
+  
 
   .state('tab.departments', {
       url: '/departments',
@@ -127,6 +176,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+	
     .state('tab.department-detail', {
       url: '/departments/:departmentId',
       views: {
@@ -148,6 +198,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/home');
 
 });

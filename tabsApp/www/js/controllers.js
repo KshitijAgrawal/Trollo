@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('TaskCtrl', function($scope, $ionicModal, $ionicPopover, Tasks) {		
+.controller('TasksCtrl', function($scope, $ionicModal, $ionicPopover, Tasks) {		
 		 var allSuccess = function(cardsResponse) {
 			console.log(cardsResponse);
 			$scope.cards = cardsResponse;
@@ -167,18 +167,6 @@ angular.module('starter.controllers', [])
 		     putCard.closed = newCard.closed;
 
 		    Tasks.put(putCard, $stateParams.cardId, putSuccess);
-		  };
-
-		  $scope.changeName = function(newCard){
-		  	var putSuccess = function(data) {
-		        console.log('Card Saved successfully. Data returned:' + JSON.stringify(data));
-		      };
-
-		    console.log("changeName called");
-		    var currentCard = Tasks.get($stateParams.cardId);
-		    currentCard.name = newCard.name;
-
-		    Tasks.put(currentCard, $stateParams.cardId, putSuccess);
 		  };
 })
 
