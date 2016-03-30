@@ -160,7 +160,25 @@ angular.module('starter.controllers', [])
 		        console.log('Card Saved successfully. Data returned:' + JSON.stringify(data));
 		      };
 
-		    Tasks.put(newCard, $stateParams.cardId, putSuccess);
+		     console.log("Put called");
+		     var putCard = {};
+		     putCard.name = newCard.name;
+		     putCard.desc = newCard.desc;
+		     putCard.closed = newCard.closed;
+
+		    Tasks.put(putCard, $stateParams.cardId, putSuccess);
+		  };
+
+		  $scope.changeName = function(newCard){
+		  	var putSuccess = function(data) {
+		        console.log('Card Saved successfully. Data returned:' + JSON.stringify(data));
+		      };
+
+		    console.log("changeName called");
+		    var currentCard = Tasks.get($stateParams.cardId);
+		    currentCard.name = newCard.name;
+
+		    Tasks.put(currentCard, $stateParams.cardId, putSuccess);
 		  };
 })
 
