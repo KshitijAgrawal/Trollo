@@ -1,24 +1,42 @@
 <ion-view>
-<div class="bar bar-header bar-balanced">
-  <h1 class="title">Home</h1>
+<div class="bar bar-header bar-balanced custom-dark">
+  <h1 class="title custom-dark">XYZ corp</h1>
 </div>
 <ion-content class="has-header">
+<br/><br/><br/>
+ <md-whiteframe class="md-whiteframe-4dp">
+ 	<a href="#/tasks/assignedtome" style="text-decoration: none;"><md-card class="tasks-theme" style="padding: 0px">
+ 		<md-card-title>
+ 			<md-card-title-text>  <span class="md-headline">Tasks</span>
+            <span class="md-subhead">10 new tasks</span>
+            </md-card-title-text>
 
-<div class="row">
-	<div class = "col">
-		<a href = "#/tasks/assignedtome">
-			<div class="card">
-				 <img src="img/tasks.png">
-			</div>
-		</a>
-	</div>
-	<div class = "col">
-	<md-button class="md-raised">Button</md-button>
-      <md-button class="md-raised md-primary">Primary</md-button>
-      <md-button ng-disabled="true" class="md-raised md-primary">Disabled</md-button>
-      <md-button class="md-raised md-warn">Warn</md-button>
-      	<!--<button class="button icon-left ion-star button-dark">Status</button>-->
-	</div>	
-</div>
+ 		</md-card-title>	
+ 	</md-card>
+ 	</a>
+  </md-whiteframe>
+  <md-whiteframe class="md-whiteframe-20dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25">
+  <span>
+ 	<md-card class="status-theme">
+ 		<md-card-title>
+ 			<md-card-title-text>  <span class="md-headline">Status</span>
+            
+            </md-card-title-text>
+
+ 		</md-card-title>	
+ 	</md-card>
+ 	</span>
+  </md-whiteframe>
+<br/><br/><br/><br/><br/>
+  <md-whiteframe class="md-whiteframe-5dp" flex-sm="0" flex-gt-sm="150" flex-gt-md="00" layout layout-align="center center">
+    <span><md-card class="status-theme">
+ 		<md-card-title>
+ 			<md-card-title-text>  <span class="md-headline">Status</span>
+            
+            </md-card-title-text>
+
+ 		</md-card-title>	
+ 	</md-card></span>
+  </md-whiteframe>
 </ion-content>
 </ion-view>
