@@ -20,14 +20,28 @@
       </div>
     </form>
 
+    <h3> Comments </h3>
     <div class="list card">
-      <div class="item-remove-animate" ng-repeat="action in card.actions">
+      <div class="item-remove-animate" ng-repeat="comment in card.comments">
         <div class="item item-divider dark">
-          {{action.memberCreator.fullName}}
+          {{comment.memberCreator.fullName}}
         </div>
         <div class="item item-text-wrap">
           <p>{{action.data.text}}</p>
-          <p class="subdued">On {{action.date}}</script> </p>
+          <p class="subdued">On {{comment.date}}</script> </p>
+        </div>
+      </div>      
+    </div>
+
+    <h3> History </h3>
+    <div class="list card">
+      <div class="item-remove-animate" ng-repeat="activity in card.history">
+        <div class="item item-divider dark">
+          {{activity.memberCreator.fullName}}
+        </div>
+        <div class="item item-text-wrap">
+          <p> {{activity.data.text}} </p>
+          <p class="subdued">On {{activity.date}}</script> </p>
         </div>
       </div>      
     </div>

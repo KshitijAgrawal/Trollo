@@ -157,7 +157,31 @@ angular.module('starter.controllers', [])
 		  var getSuccess = function(actions)
 		  {
 		  	console.log('actions Retrieved successfully. Data returned:' + JSON.stringify(actions));
-		  	$scope.card.actions = actions;
+		  	$scope.card.comments = [];
+		  	$scope.card.history =[];
+		  	actions.forEach(
+		  		function(action)
+		  		{
+		  			if(action.type == "commentCard")
+		  			{
+		  				$scope.card.comments.push(action);
+		  			}
+		  			else
+		  			{
+		  				console.log(action.data.old[0]);
+
+		  				var changeText = "Changed ";
+
+		  				for(var property in action.data.old)
+		  				{
+		  					changeText += property.toUpperCase() + " FROM '" + action.data.old[property] +  "' TO '" + action.data.card[property] + "'";
+		  				}
+		  				
+		  				action.data.text = changeText;
+		  				$scope.card.history.push(action);
+		  			}
+		  		}
+	  		)
 		  }
 		  Tasks.getTaskActions($stateParams.cardId, getSuccess);
 

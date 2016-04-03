@@ -177,7 +177,7 @@ angular.module('starter.services', [])
 
 		getActionsForCard: function(cardId)
 		{
-			var getUri = 'cards/' + cardId + '/actions';
+			var getUri = 'cards/' + cardId + '/actions?filter=commentCard,updateCard';
 			var hh = httpHelper("getActionsForCard");
 		    Trello.get(getUri, hh.success, hh.error);
 			return hh.getPromise();
