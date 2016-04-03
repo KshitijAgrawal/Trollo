@@ -19,5 +19,18 @@
         <button type="submit" class="button button-block button-positive" ng-disabled="editTaskForm.$pristine || editTaskForm.$submitted">Save</button>
       </div>
     </form>
+
+    <div class="list card">
+      <div class="item-remove-animate" ng-repeat="action in card.actions">
+        <div class="item item-divider dark">
+          {{action.memberCreator.fullName}}
+        </div>
+        <div class="item item-text-wrap">
+          <p>{{action.data.text}}</p>
+          <p class="subdued">On {{action.date}}</script> </p>
+        </div>
+      </div>      
+    </div>
+
   </ion-content>
 </ion-view>
