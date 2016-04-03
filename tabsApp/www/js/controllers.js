@@ -151,7 +151,15 @@ angular.module('starter.controllers', [])
 		  })
 
 .controller('TaskDetailCtrl', function($scope, $stateParams, Tasks) {
+
 		  $scope.card = Tasks.get($stateParams.cardId);
+
+		  var getSuccess = function(actions)
+		  {
+		  	console.log('actions Retrieved successfully. Data returned:' + JSON.stringify(actions));
+		  	$scope.card.actions = actions;
+		  }
+		  Tasks.getTaskActions($stateParams.cardId, getSuccess);
 
 		  $scope.department = Tasks.getDepartment($stateParams.departmentId)
 

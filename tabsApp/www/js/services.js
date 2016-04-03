@@ -63,6 +63,12 @@ angular.module('starter.services', [])
       return null;
     },
 
+    getTaskActions: function(cardId, getSuccess) {
+
+    	TrelloApis.getActionsForCard(cardId).then
+    	(getSuccess, genericError);
+    },
+
     getDepartment: function(depId){
     	for (var i = 0; i < departments.length; i++) {
         if (departments[i].id === depId) {
@@ -158,6 +164,22 @@ angular.module('starter.services', [])
 			var deleteUri = 'cards/' + cardId;
 			var hh = httpHelper("deleteACard");
 		    Trello.delete(deleteUri, hh.success, hh.error);
+			return hh.getPromise();
+		},
+
+		getACard: function(cardId)
+		{
+			var getUri = 'cards/' + cardId;
+			var hh = httpHelper("getACard");
+		    Trello.get(getUri, hh.success, hh.error);
+			return hh.getPromise();
+		},
+
+		getActionsForCard: function(cardId)
+		{
+			var getUri = 'cards/' + cardId + '/actions';
+			var hh = httpHelper("getActionsForCard");
+		    Trello.get(getUri, hh.success, hh.error);
 			return hh.getPromise();
 		},
 
