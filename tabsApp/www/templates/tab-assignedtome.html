@@ -22,9 +22,13 @@
             <p>{{card.desc}}</p>
             <p class="subdued">Due on {{card.due}}</script> </p>
             <div class="row">
-              <div class="col col-offset-90">
+              <div class="col col-offset-67">
                 <button class="button button-balanced padding-horizontal" ng-click="remove(card)">
                   <i class="ion-android-done"></i>
+                </button>
+
+                <button class="button button-balanced padding-horizontal" ng-click="subscribe(card)">
+                  <i class="ion-ios-paw"></i>
                 </button>
               </div>
             </div>
