@@ -24,7 +24,8 @@
     <script src="js/trollo.common.js"></script>
 	
 	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-	<script src="https://api.trello.com/1/client.js?key=2874cd3f5d3996b9cfec3c7915222e85"></script>
+<!--	<script src="js/client.js"></script> -->
+<script src="https://api.trello.com/1/client.js?key=2874cd3f5d3996b9cfec3c7915222e85&amp;token=815a6d7ae2cef5f61de6dcc83c553fa383bd666b8db972cc09a38aa503832406"></script>
 
 <!--TODO: Replace CDN links with local js/css files. -->
 <!-- Angular Material Library -->
@@ -38,19 +39,26 @@
   <!-- Angular Material Library -->
   <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
 
+  <!--font awesome css -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
 	<script>
-	var authenticationSuccess = function() { console.log('Successful authentication'); };
+
+	var authenticationSuccess = function() { 
+  console.log('Successful authentication'); };
 	var authenticationFailure = function() { console.log('Failed authentication'); };
-	Trello.authorize({
-	  //type: popup,
-	  name: 'Getting Started Application',
+	//Trello.deauthorize();
+  Trello.authorize({
+	  //type: 'popup',
+	  name: 'MyApp',
 	  scope: {
 		read: true,
 		write: true },
 	  //expiration: never,
+    interactive:false,
 	  success: authenticationSuccess,
 	  error: authenticationFailure
-	});
+    	});
 	</script>
   </head>
   <body ng-app="starter">
