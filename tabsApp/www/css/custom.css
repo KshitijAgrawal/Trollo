@@ -23,3 +23,11 @@
 	background-color: #FF9800 !important;
 	color:white!important;
 }
+
+.md-button.md-fab.md-fab-bottom-right {
+top: auto;
+right: 20px;
+bottom: 20px;
+left: auto;
+position: fixed;
+}
