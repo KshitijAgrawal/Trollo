@@ -1,12 +1,15 @@
-<ion-view title="Assigned To Me">
+<ion-view title="Tasks">
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-nav-buttons side="right">
       <button type = "button" class="button button-clear ion-plus-round balanced" ng-click="openModal()"></button>
   </ion-nav-buttons>
-<ion-content class="has-header has-footer"><!-- style="background-color: #EEEEEE">-->
-    <ion-refresher on-refresh="refresh()"
+  <div class="bar bar-subheader">
+  <h2 class="title" style="color: #6200EA">Assigned to me</h2>
+</div>
+<ion-content class="has-header has-subheader has-footer"><!-- style="background-color: #EEEEEE">-->
+  <ion-refresher on-refresh="refresh()"
                          pulling-text="Pull to refresh..."
                          refreshing-text="Refreshing!"
                          refreshing-icon="ion-loading-c">
@@ -39,10 +42,10 @@
               </md-card-title-text>
             </div>
             <div flex="10" style="padding-right: 50px">
-          <md-button class="md-icon-button" aria-label="Favorite">
+          <md-button class="md-icon-button" aria-label="Favorite" ng-href="#">
              <md-icon md-font-set="material-icons"> star rate </md-icon>
             </md-button>
-            <md-button class="md-icon-button" aria-label="Favorite">
+            <md-button class="md-icon-button" aria-label="Favorite" ng-href="#">
              <md-icon md-font-set="material-icons"> done </md-icon>
             </md-button>
           </div>
@@ -51,6 +54,7 @@
   </md-card>
   </a>
 
+  
 
 <!--
 
