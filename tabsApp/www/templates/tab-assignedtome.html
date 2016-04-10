@@ -42,10 +42,11 @@
               </md-card-title-text>
             </div>
             <div flex="10" style="padding-right: 50px">
-          <md-button class="md-icon-button" aria-label="Favorite" ng-href="#">
+
+            <md-button class="md-icon-button" aria-label="Favorite" ng-click="subscribe(card)">
              <md-icon md-font-set="material-icons"> star rate </md-icon>
             </md-button>
-            <md-button class="md-icon-button" aria-label="Favorite" ng-href="#">
+            <md-button class="md-icon-button" aria-label="Favorite" ng-click="remove(card)">
              <md-icon md-font-set="material-icons"> done </md-icon>
             </md-button>
           </div>
@@ -88,9 +89,13 @@
             <p>{{card.desc}}</p>
             <p class="subdued">Due on {{card.due}}</script> </p>
             <div class="row">
-              <div class="col col-offset-90">
+              <div class="col col-offset-67">
                 <button class="button button-balanced padding-horizontal" ng-click="remove(card)">
                   <i class="ion-android-done"></i>
+                </button>
+
+                <button class="button button-balanced padding-horizontal" ng-click="subscribe(card)">
+                  <i class="ion-ios-paw"></i>
                 </button>
               </div>
             </div>

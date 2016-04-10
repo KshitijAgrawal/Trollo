@@ -39,6 +39,16 @@ angular.module('starter.controllers', [])
 			Tasks.post(newcard, addSuccess);
 		 };
 
+		 // Subscribe a Task ------------------------------------------
+		 $scope.subscribe = function(card)
+		 {
+		 	var subscribeSuccess = function(data)
+		 	{
+
+		 	};
+		 	Tasks.subscribe(card, subscribeSuccess);
+		 }
+
 		 //Refresh ----------------------------------------------
 		 $scope.refresh = function(){
 			 Tasks.all(allSuccess, memberSuccess);
