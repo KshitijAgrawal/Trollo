@@ -1,12 +1,19 @@
+<<<<<<< HEAD
 <ion-view title="Assigned To {{currentUser.fullName}}">
+=======
+<ion-view title="Tasks">
+>>>>>>> c14a6a8f0bf501ffc2497059fd7db856053d9112
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-nav-buttons side="right">
       <button type = "button" class="button button-clear ion-plus-round balanced" ng-click="openModal()"></button>
   </ion-nav-buttons>
-<ion-content class="has-header has-footer"><!-- style="background-color: #EEEEEE">-->
-    <ion-refresher on-refresh="refresh()"
+  <div class="bar bar-subheader">
+  <h2 class="title" style="color: #6200EA">Assigned to me</h2>
+</div>
+<ion-content class="has-header has-subheader has-footer"><!-- style="background-color: #EEEEEE">-->
+  <ion-refresher on-refresh="refresh()"
                          pulling-text="Pull to refresh..."
                          refreshing-text="Refreshing!"
                          refreshing-icon="ion-loading-c">
@@ -54,6 +61,7 @@
       </md-card>
     
 
+  
 
 <!--
 
