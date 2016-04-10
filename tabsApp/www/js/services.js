@@ -56,13 +56,14 @@ angular.module('starter.services', [])
 
     subscribe: function(card, subscribeSuccess)
     {
-
+    	TrelloApis.subscribeACard(card.id).then(
+    		subscribeSuccess, genericError);
     },
 
     get: function(cardId) {
       for (var i = 0; i < cards.length; i++) {
         if (cards[i].id === cardId) {
-          return cards[i];
+        	return cards[i];
         }
       }
       return null;
@@ -185,6 +186,17 @@ angular.module('starter.services', [])
 			var getUri = 'cards/' + cardId + '/actions?filter=commentCard,updateCard';
 			var hh = httpHelper("getActionsForCard");
 		    Trello.get(getUri, hh.success, hh.error);
+			return hh.getPromise();
+		},
+
+		subscribeACard: function(cardId)
+		{
+			var putUri = 'cards/' + cardId;
+			var subscribedCard = {
+				subscribed : 'true'
+			};
+			var hh = httpHelper("subscribeACard");
+		    Trello.put(putUri, subscribedCard, hh.success, hh.error);
 			return hh.getPromise();
 		},
 

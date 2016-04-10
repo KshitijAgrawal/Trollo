@@ -22,9 +22,33 @@
             <h2>{{department.name}}</h2>
           </ion-item>
 
+          <div class="item-remove-animate" ng-repeat="shownCard in shownDepartmentCards" ng-show="isDepartmentShown(department)">
+            <md-card class="md-whiteframe-3dp" style="margin-left:0px;margin-right: 0px;border-radius: 0px">
+              <md-card-title  style="padding:4px">
+                <div layout="row" style="width:100%">
+                  
+                  <div flex="90" style="padding-left:10px">
+                    <md-card-title-text>  
+                      <a href="#/tasks/cards/{{shownCard.id}}" style="text-decoration: none">  
+                        <span class="md-headline" style="font-size: 20px;color:#3F51B5;margin-bottom: 5px">{{shownCard.name}}</span>
+                         <span class="md-body-1" style="color: #424242"><p>{{shownCard.desc}}</p></span>
+                         <span class="md-body-1" style="color: grey;font-size: 12px">Updated on Mon 11:10 AM</span>
+                      </a>
+                    </md-card-title-text>
+                  </div>
+                  
+                  <div flex="10" style="padding-right: 50px">
+                    <md-button class="md-icon-button" aria-label="Favorite" ng-click="subscribe(shownCard)">
+                     <md-icon md-font-set="material-icons" style="color: #3F51B5"> {{shownCard.starIcon}}</md-icon>
+                    </md-button>
+                  </div>
+                </div>
+              </md-card-title>  
+            </md-card>   
+          </div>
 
-          <div class="item-remove-animate" ng-repeat="shownCard in shownDepartmentCards"
-                    ng-show="isDepartmentShown(department)">
+          <!--
+          <div class="item-remove-animate" ng-repeat="shownCard in shownDepartmentCards" ng-show="isDepartmentShown(department)">
             <div class="card" id="task-card">
               <div class="item item-divider dark">
                 {{shownCard.name}}
@@ -35,6 +59,7 @@
               </a>
             </div>      
           </div>
+          -->
       </div>
     </ion-list>
   </ion-content>

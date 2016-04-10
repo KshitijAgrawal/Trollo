@@ -3,6 +3,11 @@ angular.module('starter.controllers', [])
 .controller('TasksCtrl', function($scope, $ionicModal, $ionicPopover, Tasks) {		
 		 var allSuccess = function(cardsResponse) {
 			console.log(cardsResponse);
+			var markStar = function(card)
+			{
+				card.starIcon = card.subscribed ? 'star' : 'star_border';
+			}
+			cardsResponse.forEach(markStar);
 			$scope.cards = cardsResponse;
 		 };
 
@@ -79,6 +84,11 @@ angular.module('starter.controllers', [])
 		      	var getSuccess = function(tasks)
 			 	{
 			 		console.log('tasks for dept' + JSON.stringify(tasks));
+			 		var markStar = function(task)
+					{
+						task.starIcon = task.subscribed ? 'star' : 'star_border';
+					}
+					tasks.forEach(markStar);
 			 		$scope.shownDepartmentCards = tasks;
 			 		shownCards[department.id] = tasks;
 			 	}

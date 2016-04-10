@@ -1,4 +1,4 @@
-<ion-view title="Assigned To Me">
+<ion-view title="Assigned To {{currentUser.fullName}}">
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
@@ -27,29 +27,32 @@
         </md-card-actions>
       </md-card> -->    
 
-     <a href="#/tasks/cards/{{card.id}}" style="text-decoration: none">
-  <md-card class="md-whiteframe-3dp" style="margin-left:0px;margin-right: 0px;border-radius: 0px">
-    <md-card-title  style="padding:4px">
-      <div layout="row" style="width:100%">
-        <div flex="90" style="padding-left:10px">
-      <md-card-title-text>  
-          <span class="md-headline" style="font-size: 20px;color:#3F51B5;margin-bottom: 5px">{{card.name}}</span>
-           <span class="md-body-1" style="color: #424242"><p>{{card.desc}}</p></span>
-           <span class="md-body-1" style="color: grey;font-size: 12px">Updated on Mon 11:10 AM</span>
+      <md-card class="md-whiteframe-3dp" style="margin-left:0px;margin-right: 0px;border-radius: 0px">
+        <md-card-title  style="padding:4px">
+          <div layout="row" style="width:100%">
+            
+            <div flex="90" style="padding-left:10px">
+              <md-card-title-text>  
+                <a href="#/tasks/cards/{{card.id}}" style="text-decoration: none">  
+                  <span class="md-headline" style="font-size: 20px;color:#3F51B5;margin-bottom: 5px">{{card.name}}</span>
+                   <span class="md-body-1" style="color: #424242"><p>{{card.desc}}</p></span>
+                   <span class="md-body-1" style="color: grey;font-size: 12px">Updated on Mon 11:10 AM</span>
+                </a>
               </md-card-title-text>
             </div>
+            
             <div flex="10" style="padding-right: 50px">
-            <md-button class="md-icon-button" aria-label="Favorite" ng-click="subscribe(card)">
-             <md-icon md-font-set="material-icons"> star rate </md-icon>
-            </md-button>
-            <md-button class="md-icon-button" aria-label="Favorite" ng-click="remove(card)">
-             <md-icon md-font-set="material-icons"> done </md-icon>
-            </md-button>
+              <md-button class="md-icon-button" aria-label="Favorite" ng-click="subscribe(card)">
+               <md-icon md-font-set="material-icons" style="color: #3F51B5"> {{card.starIcon}}</md-icon>
+              </md-button>
+              <md-button class="md-icon-button" aria-label="Favorite" ng-click="remove(card)">
+               <md-icon md-font-set="material-icons"> done </md-icon>
+              </md-button>
+            </div>
           </div>
-          </div>
-    </md-card-title>  
-  </md-card>
-  </a>
+        </md-card-title>  
+      </md-card>
+    
 
 
 <!--
