@@ -5,7 +5,7 @@
   <ion-nav-buttons side="right">
       <button type = "button" class="button button-clear ion-plus-round balanced" ng-click="openModal()"></button>
   </ion-nav-buttons>
-<ion-content class="has-header">
+<ion-content class="has-header has-footer"><!-- style="background-color: #EEEEEE">-->
     <ion-refresher on-refresh="refresh()"
                          pulling-text="Pull to refresh..."
                          refreshing-text="Refreshing!"
@@ -13,8 +13,70 @@
 
     </ion-refresher>
     <div class="list">
-      <div class="item-remove-animate" ng-repeat="card in cards">
-        <div class="card" id="task-card">
+      <div ng-repeat="card in cards">
+
+      
+     <!-- <md-card  class="md-whiteframe-3dp" style="margin-left:0px;margin-right: 0px;border-radius: 0px">
+      <md-card-title style="padding:4px">
+          <md-card-title-text>
+            <span class="md-headline">{{card.name}}</span>
+            <span class="md-subhead">{{card.desc}}</span>
+          </md-card-title-text>
+          </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+        </md-card-actions>
+      </md-card> -->    
+
+     <a href="#/tasks/cards/{{card.id}}" style="text-decoration: none">
+  <md-card class="md-whiteframe-3dp" style="margin-left:0px;margin-right: 0px;border-radius: 0px">
+    <md-card-title  style="padding:4px">
+      <div layout="row" style="width:100%">
+        <div flex="90" style="padding-left:10px">
+      <md-card-title-text>  
+          <span class="md-headline" style="font-size: 20px;color:#3F51B5;margin-bottom: 5px">{{card.name}}</span>
+           <span class="md-body-1" style="color: #424242"><p>{{card.desc}}</p></span>
+           <span class="md-body-1" style="color: grey;font-size: 12px">Updated on Mon 11:10 AM</span>
+              </md-card-title-text>
+            </div>
+            <div flex="10" style="padding-right: 50px">
+          <md-button class="md-icon-button" aria-label="Favorite">
+             <md-icon md-font-set="material-icons"> star rate </md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Favorite">
+             <md-icon md-font-set="material-icons"> done </md-icon>
+            </md-button>
+          </div>
+          </div>
+    </md-card-title>  
+  </md-card>
+  </a>
+
+
+<!--
+
+      <md-card>
+        <md-card-content layout="column" layout-align="space-between">
+            <span class="md-headline">Card with  image</span>
+          <md-card-actions layout="column">
+            <md-button class="md-icon-button" aria-label="Favorite">
+             <md-icon md-font-set="material-icons"> favorite </md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Settings">
+              <md-icon md-font-set="material-icons"> menu </md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Share">
+              <md-icon md-font-set="material-icons"> share-arrow </md-icon>
+            </md-button>
+          </md-card-actions>
+        </md-card-content>
+      </md-card>-->
+
+      <div>
+
+</div>
+      
+        
+    <!--    <div class="card" id="task-card">
           <div class="item item-divider">
             {{card.name}}
           </div>
@@ -33,7 +95,8 @@
               </div>
             </div>
           </a>
-        </div>      
+        </div>     -->
+
       </div>
     </div>
   </ion-content></ion-view>
