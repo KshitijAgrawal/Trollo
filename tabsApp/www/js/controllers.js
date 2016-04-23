@@ -49,7 +49,8 @@ angular.module('starter.controllers', [])
 		 {
 		 	var subscribeSuccess = function(data)
 		 	{
-
+		 		card.starIcon = 'star';
+		 		console.log(card.starIcon);
 		 	};
 		 	Tasks.subscribe(card, subscribeSuccess);
 		 }
@@ -76,7 +77,8 @@ angular.module('starter.controllers', [])
 		    if ($scope.isDepartmentShown(department)) {
 		      $scope.shownDepartmentCards = null;
 		      $scope.shownDepartment = null;
-		    } else 
+		    } 
+		    else 
 		    {
 		      if(shownCards[department.id] == undefined)
 		      {
@@ -93,7 +95,8 @@ angular.module('starter.controllers', [])
 			 		shownCards[department.id] = tasks;
 			 	}
 		      	Tasks.getTasksForDepartment(department.id, getSuccess);
-		      } else {
+		      } 
+		      else {
 		      	console.log("already in cache")
 		      	$scope.shownDepartmentCards = shownCards[department.id];
 		      }
